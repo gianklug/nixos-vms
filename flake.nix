@@ -19,7 +19,7 @@
           modules = [
             ./hosts/${name}/configuration.nix
             agenix.nixosModules.default
-            comin.nixosModules.default
+            comin.nixosModules.comin
           ];
         });
 
