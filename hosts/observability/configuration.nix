@@ -48,6 +48,7 @@
     vim-full
     htop
     git
+    hyfetch
   ];
   # AGE
   age.secrets = {
