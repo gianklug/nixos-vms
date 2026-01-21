@@ -47,7 +47,7 @@
   environment.systemPackages = with pkgs; [
     vim-full
     htop
-    (pkgs.callPackage "${builtins.fetchTarball "https://github.com/ryantm/agenix/archive/main.tar.gz"}/pkgs/agenix.nix" {})
+    git
   ];
   # AGE
   age.secrets = {
