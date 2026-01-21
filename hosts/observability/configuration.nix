@@ -66,11 +66,10 @@
   # Comin
   services.comin = {
     enable = true;
-
+    hostname = "observability";
     remotes = [{
       name = "origin";
       url = "https://github.com/gianklug/nixos-vms";
-
       branches.main.operation = "switch";
     }];
   };
