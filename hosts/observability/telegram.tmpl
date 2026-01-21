@@ -1,0 +1,55 @@
+{{ define "telegram.message" }}
+{{- $firing := .Alerts.Firing -}}
+{{- $resolved := .Alerts.Resolved -}}
+
+{{- if gt (len $firing) 0 }}
+🔥 *FIRING* — {{ len $firing }}
+{{ range $firing }}
+━━━━━━━━━━━━━━━━━━━━
+*{{ or .Annotations.summary .Labels.alertname }}*
+
+{{- with .Annotations.description }}
+{{ . }}
+{{- end }}
+
+*Severity:* {{ if eq .Labels.severity "critical" }}🟥 critical{{ else if eq .Labels.severity "warning" }}🟨 warning{{ else if eq .Labels.severity "info" }}🟦 info{{ else }}⬜ unknown{{ end }}
+{{- if .Labels.instance }}
+*Instance:* `{{ .Labels.instance }}`
+{{- end }}
+*Started:* {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+
+{{- if or .Labels.cluster .Labels.namespace .Labels.job }}
+*Context:*
+{{- if .Labels.cluster }} • *cluster:* `{{ .Labels.cluster }}`{{ end }}
+{{- if .Labels.namespace }} • *ns:* `{{ .Labels.namespace }}`{{ end }}
+{{- if .Labels.job }} • *job:* `{{ .Labels.job }}`{{ end }}
+{{- end }}
+
+{{- if or .GeneratorURL .Annotations.runbook_url }}
+*Links:*
+{{- if .GeneratorURL }} [🔎 Query]({{ .GeneratorURL }}){{ end }}
+{{- with .Annotations.runbook_url }} | [📘 Runbook]({{ . }}){{ end }}
+{{- end }}
+
+{{ end }}
+{{ end }}
+
+{{- if gt (len $resolved) 0 }}
+✅ *RESOLVED* — {{ len $resolved }}
+{{ range $resolved }}
+━━━━━━━━━━━━━━━━━━━━
+*{{ or .Annotations.summary .Labels.alertname }}*
+
+{{- if .Labels.instance }}
+*Instance:* `{{ .Labels.instance }}`
+{{- end }}
+*Ended:* {{ .EndsAt.Format "2006-01-02 15:04:05" }}
+
+{{- if .GeneratorURL }}
+*Links:* [🔎 Query]({{ .GeneratorURL }})
+{{- end }}
+
+{{ end }}
+{{ end }}
+{{ end }}
+
