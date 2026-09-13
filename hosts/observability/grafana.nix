@@ -77,10 +77,6 @@ in
     url = "https://grafana.com/api/dashboards/19792/revisions/6/download";
     sha256 = "96348d7c68e6d29ced3ba9a8da4358b8605be6815be52daf6d8be85a44f94971";
   };
-  environment.etc."grafana-dashboards/22870-caddy.json".source = builtins.fetchurl {
-    url = "https://grafana.com/api/dashboards/22870/revisions/3/download";
-    sha256 = "4ffa089ae450ac41962e569a32705534535e028291d63d48883a009469989cf5";
-  };
   environment.etc."grafana-dashboards/24146-caddy-hosts.json".source = builtins.fetchurl {
     url = "https://grafana.com/api/dashboards/24146/revisions/1/download";
     sha256 = "bf0fceddb34a434b49c21b19298be4314ea37aa906fac7c2b40ed84f4be9dd86";
