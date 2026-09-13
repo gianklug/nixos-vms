@@ -26,6 +26,9 @@ in
         api_url = "${idpUrl}/application/o/userinfo/";
         role_attribute_path = "contains(groups, 'authentik Admins') && 'Admin' || 'Viewer'";
       };
+      security = {
+        secret_key = "$__file{${config.age.secrets.grafana-secret-key.path}}";
+      };
     };
     provision = {
       enable = true;
