@@ -50,9 +50,7 @@
         static_configs = [
           {
             targets = [
-              "fw.int.gk.wtf:9100"
               "pve.int.gk.wtf:9100"
-              "truenas.int.gk.wtf:9100"
               "docker.int.gk.wtf:9100"
               "t.int.gk.wtf:9100"
               "web.int.gk.wtf:9100"
