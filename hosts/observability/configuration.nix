@@ -41,6 +41,10 @@
     Resolve = {
       Cache=true;
       CacheFromLocalhost=true;
+      Domains = [ "~." ];
+      FallbackDNS = [
+        "192.168.1.1"
+      ];
     };
   };
   # Install basic system utilities
