@@ -50,19 +50,17 @@
         static_configs = [
           {
             targets = [
-              "matrix-01.int.gk.wtf:9100"
-              "nextcloud-01.int.gk.wtf:9100"
-              "jellyfin-01.int.gk.wtf:9100"
-              "wazuh-01.int.gk.wtf:9100"
-              "blog-01.int.gk.wtf:9100"
-              "mastodon-01.int.gk.wtf:9100"
-              "unifi-01.int.gk.wtf:9100"
-              "mc-01.int.gk.wtf:9100"
-              "web-01.int.gk.wtf:9100"
-              "kasm-01.int.gk.wtf:9100"
-              "torrenting-01.int.gk.wtf:9100"
-              "docker-01.int.gk.wtf:9100"
-              "homeassistant-01.int.gk.wtf:9100"
+              "fw.int.gk.wtf:9100"
+              "pve.int.gk.wtf:9100"
+              "truenas.int.gk.wtf:9100"
+              "docker.int.gk.wtf:9100"
+              "t.int.gk.wtf:9100"
+              "web.int.gk.wtf:9100"
+              "mastodon.int.gk.wtf:9100"
+              "blog.int.gk.wtf:9100"
+              "jellyfin.int.gk.wtf:9100"
+              "cloud.int.gk.wtf:9100"
+              "caddy.int.gk.wtf:9100"
             ];
           }
         ];
@@ -83,8 +81,8 @@
         static_configs = [
           {
             targets = [
-              "torrenting-01.int.gk.wtf:8080"
-              "docker-01.int.gk.wtf:8080"
+              "t.int.gk.wtf:8080"
+              "docker.int.gk.wtf:8080"
             ];
           }
         ];
