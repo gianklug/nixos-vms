@@ -38,8 +38,10 @@
   };
   # Cache DNS lookups to improve performance
   services.resolved.settings = {
-    Cache=true;
-    CacheFromLocalhost=true;
+    Resolve = {
+      Cache=true;
+      CacheFromLocalhost=true;
+    };
   };
   # Install basic system utilities
   environment.systemPackages = with pkgs; [
