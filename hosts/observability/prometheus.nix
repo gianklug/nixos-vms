@@ -75,6 +75,16 @@
         ];
       }
       {
+        job_name = "caddy";
+        static_configs = [
+          {
+            targets = [
+              "caddy.int.gk.wtf:2019"
+            ];
+          }
+        ];
+      }
+      {
         job_name = "cadvisor";
         static_configs = [
           {
