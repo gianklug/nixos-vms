@@ -63,6 +63,11 @@
       file = ./secrets/telegram-token.age;
       mode = "0400";
     };
+
+    grafana-secret-key = {
+      file = ./secrets/grafana-secret-key.age;
+      mode = "0400";
+    };
   };
   # Comin
   services.comin = {
