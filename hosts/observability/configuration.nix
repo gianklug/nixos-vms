@@ -66,6 +66,7 @@
 
     grafana-secret-key = {
       file = ./secrets/grafana-secret-key.age;
+      user = "grafana";
       mode = "0400";
     };
   };
