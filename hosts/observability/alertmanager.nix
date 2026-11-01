@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 {
+  systemd.services.alertmanager.serviceConfig.LoadCredential = [
+    "telegram-token:${config.age.secrets.alertmanager-telegram-token.path}"
+  ];
+
   services.prometheus.alertmanager = {
     enable = true;
     webExternalUrl = "https://alertmanager.gk.wtf";
@@ -28,8 +32,7 @@
           telegram_configs = [
             {
               send_resolved = true;
-              bot_token_file =
-                config.age.secrets.alertmanager-telegram-token.path;
+              bot_token_file = "/run/credentials/alertmanager.service/telegram-token";
               chat_id = 187668419;
               parse_mode = "Markdown";
               message = "{{ template \"telegram.message\" . }}";
