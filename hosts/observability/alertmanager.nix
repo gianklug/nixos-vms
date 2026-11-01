@@ -10,12 +10,17 @@
     configuration = {
       global = { };
       route = {
-        group_by = ["instance"]; # group by instance to prevent spam
+        group_by = ["..."]; # Disable aggregation: one notification per alert.
         group_wait = "30s"; # delay alerts by 30s to collect grouped events
         group_interval = "1m"; # notify about updates in the group every minute
         repeat_interval = "8h"; # repeat alerts all 8h
 
         routes = [
+          {
+            # Capacity recommendations remain visible in Prometheus/Alertmanager.
+            matchers = [ "severity=\"info\"" ];
+            receiver = "null";
+          }
           {
             matchers = [
               "alertname=\"PrometheusAlertmanagerE2eDeadManSwitch\""
