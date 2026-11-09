@@ -103,7 +103,10 @@ groups:
         description: "Error stat-ing the {{ $labels.mountpoint }} filesystem\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: HostInodesMayFillIn24Hours
-      expr: 'predict_linear(node_filesystem_files_free{fstype!~"^(fuse.*|tmpfs|cifs|nfs)"}[1h], 86400) <= 0 and node_filesystem_files_free > 0'
+      # ZFS estimates free objects from available space rather than a fixed inode
+      # table. Byte usage can therefore produce false inode-exhaustion forecasts.
+      # Disk-space alerts above continue to cover ZFS capacity.
+      expr: 'predict_linear(node_filesystem_files_free{fstype!~"^(fuse.*|tmpfs|cifs|nfs|zfs)"}[1h], 86400) <= 0 and node_filesystem_files_free > 0'
       for: 2m
       labels:
         severity: warning
