@@ -1,0 +1,29 @@
+groups:
+  - name: nixhub
+    rules:
+      - alert: NixhubBuildFailed
+        expr: 'node_systemd_unit_state{instance=~"nixhub.*",name="nixos-config-update.service",state="failed"} == 1'
+        for: 0m
+        labels:
+          severity: critical
+        annotations:
+          summary: nixhub nightly build failed
+          description: "nixos-config-update failed on nixhub: flake.lock was NOT pushed, laptops stay on the previous revision.\n  Logs: ssh root@nixhub.int.gk.wtf journalctl -u nixos-config-update"
+
+      - alert: NixhubBuildStale
+        expr: '(time() - nixhub_update_last_success_timestamp_seconds) > 36 * 3600'
+        for: 30m
+        labels:
+          severity: warning
+        annotations:
+          summary: nixhub has not built successfully for {{ $value | humanizeDuration }}
+          description: "No successful nixos-config-update run in over 36h (timer not firing, CT down, or failing every night)."
+
+      - alert: NixhubBuildMetricMissing
+        expr: 'absent(nixhub_update_last_success_timestamp_seconds)'
+        for: 36h
+        labels:
+          severity: warning
+        annotations:
+          summary: nixhub build metric missing
+          description: "nixhub_update_last_success_timestamp_seconds is not scraped (node_exporter down or no successful run yet)."

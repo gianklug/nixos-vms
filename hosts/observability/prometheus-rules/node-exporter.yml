@@ -201,7 +201,8 @@ groups:
         description: "Swap is filling up (>80%)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: HostSystemdServiceCrashed
-      expr: '(node_systemd_unit_state{state="failed"} == 1)'
+      # nixos-config-update on nixhub has its own alert (nixhub.yml)
+      expr: '(node_systemd_unit_state{state="failed",name!="nixos-config-update.service"} == 1)'
       for: 0m
       labels:
         severity: warning

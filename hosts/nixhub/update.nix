@@ -86,6 +86,17 @@ in
         nix build "github:${repo}/$rev#nixosConfigurations.$h.config.system.build.toplevel" \
           --out-link "../gcroots/$h"
       done
+
+      # For alerting (observability: NixhubBuildStale)
+      prom=/var/lib/node-exporter-textfile/nixhub_update.prom
+      {
+        echo "# HELP nixhub_update_last_success_timestamp_seconds Last successful nixos-config update+build."
+        echo "# TYPE nixhub_update_last_success_timestamp_seconds gauge"
+        echo "nixhub_update_last_success_timestamp_seconds $(date +%s)"
+        echo "# HELP nixhub_update_hosts_built Number of hosts built in the last successful run."
+        echo "# TYPE nixhub_update_hosts_built gauge"
+        echo "nixhub_update_hosts_built ${toString (builtins.length hosts)}"
+      } > "$prom.tmp" && mv "$prom.tmp" "$prom"
     '';
   };
 

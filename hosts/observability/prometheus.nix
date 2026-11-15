@@ -101,6 +101,7 @@
     ruleFiles = [
       ./prometheus-rules/embedded-exporter.yml
       ./prometheus-rules/node-exporter.yml
+      ./prometheus-rules/nixhub.yml
       ./prometheus-rules/google-cadvisor.yml
     ];
   };

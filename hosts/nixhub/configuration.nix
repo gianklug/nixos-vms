@@ -63,8 +63,13 @@
   services.prometheus.exporters.node = {
     enable = true;
     openFirewall = true;
-    enabledCollectors = [ "systemd" ];
+    enabledCollectors = [
+      "systemd"
+      "textfile"
+    ];
+    extraFlags = [ "--collector.textfile.directory=/var/lib/node-exporter-textfile" ];
   };
+  systemd.tmpfiles.rules = [ "d /var/lib/node-exporter-textfile 0755 root root -" ];
 
   # Cache DNS lookups to improve performance
   services.resolved.settings = {
