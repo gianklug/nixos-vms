@@ -59,6 +59,7 @@
               "jellyfin.int.gk.wtf:9100"
               "cloud.int.gk.wtf:9100"
               "caddy.int.gk.wtf:9100"
+              "nixhub.int.gk.wtf:9100"
             ];
           }
         ];
