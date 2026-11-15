@@ -11,10 +11,12 @@
 }:
 let
   repo = "gianklug/nixos-config";
-  # Hosts of nixos-config to keep built. "nixos" is left out: it needs the gated
-  # Binary Ninja download in its store, which this builder doesn't have.
+  # Hosts of nixos-config to keep built. "nixos" needs the gated Binary Ninja zip:
+  # it is in this host's store (/nix/var/nix/gcroots/binaryninja-zip, added with
+  # nix-store --add-fixed) and pinned by hash in nixos-config hosts/nixos.
   hosts = [
     "nixowos"
+    "nixos"
     "travel"
   ];
   stateDir = "/var/lib/nixos-config-update";
